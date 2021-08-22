@@ -43,7 +43,6 @@ function roundTime(time){return Math.floor(time*20)}
                 let keyframes = {}
                 Object.values(selectedAnimation.animators).forEach(bone => {
                     boneName = bone.name.replace(/_bone/, '')
-                    if(boneName == "armor_stand") return;
                     if(bone.rotation.length >= 1){
                         bone.rotation.forEach(keyframe => {
                             time = roundTime(keyframe.time)
@@ -60,11 +59,17 @@ function roundTime(time){return Math.floor(time*20)}
                 for([time,bone] of Object.entries(keyframes)){
                     entry = {}
                     poseNbt = {}
+                    rotNbt = undefined;
                     for([bone,rotation] of Object.entries(bone)){
-                        if(bone != "armor_stand") poseNbt[bone.split("_").map(str => (str[0].toUpperCase() + str.substring(1))).join("")] = {type:"floatArray",value:rotation}
+                        if(bone != "armor_stand") {
+                            poseNbt[bone.split("_").map(str => (str[0].toUpperCase() + str.substring(1))).join("")] = {type:"floatArray",value:rotation}
+                        } else {
+                            rotNbt = rotation[1]
+                        }
                     }
                     if(time-currentTime > 1) entry.delay = {type:"int",value:time-currentTime}
                     entry.Pose = {type:"compound",value:poseNbt}
+                    if(rotNbt !== undefined) entry.Rot = {type:"float",value:rotNbt}
                     output.value.push(entry)
                     currentTime = time
                 }
