@@ -26,6 +26,8 @@
 
                 selectedAnimation = Animator.selected
                 if(selectedAnimation == null) return Blockbench.showQuickMessage(`Please, select an animation before.`, 4000)
+
+                if(selectedAnimation.snapping != 20) return Blockbench.showQuickMessage(`Invalid snapping number ! Please, set the animation snapping to "20"`, 4000)
             }});
 
             // Create menu bar and integrates button in it
