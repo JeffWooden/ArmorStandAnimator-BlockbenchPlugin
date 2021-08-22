@@ -3,7 +3,10 @@ function warnUser(msg,time){
 }
 
 function getArray(data_point){return[data_point.x,data_point.y,data_point.z]}
+<<<<<<< HEAD
 function roundTime(time){return Math.floor(time*20)}
+=======
+>>>>>>> 831e3b8e5f64f002410901e9292dab337c11bfad
 
 (function(){
     // Credit to https://github.com/misode/ (cf. https://github.com/misode/vscode-nbt/blob/master/src/common/Snbt.ts)
