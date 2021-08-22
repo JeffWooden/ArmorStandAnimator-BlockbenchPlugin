@@ -40,7 +40,7 @@ function warnUser(msg,time){
                 let keyframes = {}
                 Object.values(selectedAnimation.animators).forEach(bone => {
                     boneName = bone.name.replace(/_bone/, '')
-                    
+                    if(boneName == "armor_stand") return;
                 })
 
             }});
