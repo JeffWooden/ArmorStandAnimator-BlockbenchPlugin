@@ -14,9 +14,6 @@
         icon: "animation",
         variant: "both",
         onload(){
-            menu = new BarMenu("asa")
-            menu.label.innerText = "Armorstand Animator"
-
             load_as_button = new Action("load_as",{name:"Load Armorstand Model",description:"",icon:"add_circle",click:function()
             {
                 console.log("Hello World")
@@ -25,6 +22,9 @@
             {
                 console.log("Hello World")
             }});
+
+            menu = new BarMenu("asa", [load_as_button,export_button])
+            menu.label.innerText = "Armorstand Animator"
         },
         onunload(){
             // menu.delete()
