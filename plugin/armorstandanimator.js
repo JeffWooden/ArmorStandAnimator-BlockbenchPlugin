@@ -41,6 +41,13 @@ function warnUser(msg,time){
                 Object.values(selectedAnimation.animators).forEach(bone => {
                     boneName = bone.name.replace(/_bone/, '')
                     if(boneName == "armor_stand") return;
+                    if(bone.rotation.length >= 1){
+                        bone.rotation.forEach(keyframe => {
+                            console.log(keyframe.time, keyframe.data_points[0])
+                            if(!keyframes[keyframe.time]) keyframes[keyframe.time] = {}
+                            keyframes[keyframe.time][boneName] = keyframe.data_points[0]
+                        })
+                    }
                 })
 
             }});
