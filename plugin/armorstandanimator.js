@@ -45,7 +45,6 @@ function getArray(data_point){return[data_point.x,data_point.y,data_point.z]}
                     if(boneName == "armor_stand") return;
                     if(bone.rotation.length >= 1){
                         bone.rotation.forEach(keyframe => {
-                            console.log(keyframe.time, keyframe.data_points[0])
                             if(!keyframes[keyframe.time]) keyframes[keyframe.time] = {}
                             keyframes[keyframe.time][boneName] = getArray(keyframe.data_points[0]).map(n => parseFloat(n).toFixed(2))
                         })
