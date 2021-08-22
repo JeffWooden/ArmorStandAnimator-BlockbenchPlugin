@@ -67,7 +67,7 @@ function roundTime(time){return Math.floor(time*20)}
                             rotNbt = rotation[1]
                         }
                     }
-                    if(time-currentTime > 1) entry.delay = {type:"int",value:time-currentTime}
+                    if(time-currentTime > 1 && output.value.length >= 1) output.value[output.value.length-1].delay = {type:"int",value:time-currentTime}
                     if(Object.entries(poseNbt).length > 0) entry.Pose = {type:"compound",value:poseNbt}
                     if(rotNbt !== undefined) entry.Rot = {type:"float",value:rotNbt}
                     output.value.push(entry)
