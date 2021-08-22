@@ -47,7 +47,7 @@ function getArray(data_point){return[data_point.x,data_point.y,data_point.z]}
                         bone.rotation.forEach(keyframe => {
                             console.log(keyframe.time, keyframe.data_points[0])
                             if(!keyframes[keyframe.time]) keyframes[keyframe.time] = {}
-                            keyframes[keyframe.time][boneName] = keyframe.data_points[0]
+                            keyframes[keyframe.time][boneName] = getArray(keyframe.data_points[0]).map(n => parseFloat(n).toFixed(2))
                         })
                     }
                 })
