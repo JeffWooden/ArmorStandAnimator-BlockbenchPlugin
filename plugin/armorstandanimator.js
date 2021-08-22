@@ -53,6 +53,11 @@ function roundTime(time){return Math.floor(time*20)}
                     }
                 })
 
+                let output = {value:[],type:"compound"}
+                currentTime = 0
+                startDelay = (selectedAnimation.startDelay == "") ? parseFloat(selectedAnimation.startDelay) : 0
+                if(startDelay>0) output.value.push({delay:{type:"int",value:startDelay}})
+
             }});
 
             // Create menu bar and integrates button in it
