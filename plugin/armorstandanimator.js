@@ -22,7 +22,7 @@
             }});
             export_button = new Action("export",{name:"Export Animation",description:"",icon:"engineering",click:function()
             {
-                console.log("Hello World")
+                if(Mode.selected.id != "animate") return Blockbench.showQuickMessage(`You've to open the "Animate" mode before exporting the animation.`, 4000)
             }});
 
             // Create menu bar and integrates button in it
