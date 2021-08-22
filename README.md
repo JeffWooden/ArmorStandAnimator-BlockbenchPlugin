@@ -1,2 +1,2 @@
 # ArmorStandAnimator-BlockbenchPlugin
-Blockbench plugin used to help animator creating armor stand animation
+Blockbench plugin used to help Minecraft creators animating armor stands in the game.
