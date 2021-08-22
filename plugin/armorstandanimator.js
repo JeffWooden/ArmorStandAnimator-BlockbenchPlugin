@@ -63,7 +63,7 @@ function roundTime(time){return Math.floor(time*20)}
                     for([bone,rotation] of Object.entries(bone)){
                         if(bone != "armor_stand") poseNbt[bone.split("_").map(str => (str[0].toUpperCase() + str.substring(1))).join("")] = {type:"floatArray",value:rotation}
                     }
-                    if(time-currentTime > 1) entry.delay = {type:"int",value:time-currentTime==1}
+                    if(time-currentTime > 1) entry.delay = {type:"int",value:time-currentTime}
                     entry.Pose = {type:"compound",value:poseNbt}
                     output.value.push(entry)
                     currentTime = time
