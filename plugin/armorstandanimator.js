@@ -4,6 +4,7 @@
     
     var menu;
     var load_as_button;
+    var export_button;
     
     Plugin.register('armorstandanimator', {
         title: "Armor Stand Animator",
@@ -17,6 +18,10 @@
             menu.label.innerText = "Armorstand Animator"
 
             load_as_button = new Action("load_as",{name:"Load Armorstand Model",description:"",icon:"add_circle",click:function()
+            {
+                console.log("Hello World")
+            }});
+            export_button = new Action("export",{name:"Export Animation",description:"",icon:"engineering",click:function()
             {
                 console.log("Hello World")
             }});
