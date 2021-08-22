@@ -36,6 +36,12 @@ function warnUser(msg,time){
                 if(selectedAnimation == null) return warnUser(`Please, select an animation before.`, config.warn)
 
                 if(selectedAnimation.snapping != 20) return warnUser(`Invalid snapping number ! Please, set the animation snapping to "20"`, config.warn)
+
+                // Collects all the bones and their keyframes
+                let bones = {} 
+                Object.values(selectedAnimation.animators).forEach(bone => {
+                    bones[bone.name.replace(/_bone/g, "")] = {position: bone.position, rotation: bone.rotation}
+                })
             }});
 
             // Create menu bar and integrates button in it
