@@ -57,6 +57,14 @@ function roundTime(time){return Math.floor(time*20)}
                 currentTime = 0
                 startDelay = (selectedAnimation.start_delay != "") ? parseFloat(selectedAnimation.start_delay) : 0
                 if(startDelay>0) output.value.push({delay:{type:"int",value:roundTime(startDelay)}})
+                for([time,bone] of Object.entries(keyframes)){
+                    poseNbt = {}
+                    for([bone,rotation] of Object.entries(bone)){
+                        if(bone != "armor_stand") poseNbt[bone.split("_").map(str => (str[0].toUpperCase() + str.substring(1))).join("")] = {type:"floatArray",value:rotation}
+                    }
+                    output.value.push({delay:{type:"int",value:time-currentTime},Pose:{type:"compound",value:poseNbt}})
+                    currentTime = time
+                }
             }});
 
             // Create menu bar and integrates button in it
