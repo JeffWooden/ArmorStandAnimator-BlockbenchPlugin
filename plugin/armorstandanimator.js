@@ -65,7 +65,7 @@ function roundTime(time){return Math.floor(time*20)}
                     }
                     if(time-currentTime > 1) entry.delay = {type:"int",value:time-currentTime==1}
                     entry.Pose = {type:"compound",value:poseNbt}
-                    output.value.push()
+                    output.value.push(entry)
                     currentTime = time
                 }
             }});
