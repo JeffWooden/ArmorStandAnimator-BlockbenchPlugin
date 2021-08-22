@@ -15,7 +15,7 @@
         variant: "both",
         onload(){
             // Create buttons
-            load_as_button = new Action("load_as",{name:"Load Armorstand Model",description:"",icon:"add_circle",click:function()
+            load_as_button = new Action("load_as",{name:"Load Armorstand Model",description:"",icon:"add_circle_outline",click:function()
             {
                 console.log("Hello World")
             }});
