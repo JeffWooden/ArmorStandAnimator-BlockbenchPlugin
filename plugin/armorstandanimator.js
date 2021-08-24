@@ -83,6 +83,7 @@ function roundTime(time){return Math.floor(time*20)}
                     output.value.push(entry)
                     currentTime = time
                 }
+                nbt = {jw_aa:{type:"compound", value:{}}}
                 console.log(stringify("list", output))
             }});
 
