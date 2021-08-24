@@ -46,8 +46,9 @@ function roundTime(time){return Math.floor(time*20)}
                     if(bone.rotation.length >= 1){
                         bone.rotation.forEach(keyframe => {
                             time = roundTime(keyframe.time)
+                            rotation = getArray(keyframe.data_points[0]).map(n => parseFloat(n).toFixed(2))
                             keyframes[time] ??= {}
-                            keyframes[time][boneName] = getArray(keyframe.data_points[0]).map(n => parseFloat(n).toFixed(2))
+                            if(boneName!="armor_stand"){keyframes[time][boneName] = rotation}else{keyframes[time][boneName] = {rotation: rotation}} 
                         })
                     }
                 })
@@ -60,11 +61,11 @@ function roundTime(time){return Math.floor(time*20)}
                     entry = {}
                     poseNbt = {}
                     rotNbt = undefined;
-                    for([bone,rotation] of Object.entries(bone)){
+                    for([bone,data] of Object.entries(bone)){
                         if(bone != "armor_stand") {
-                            poseNbt[bone.split("_").map(str => (str[0].toUpperCase() + str.substring(1))).join("")] = {type:"floatArray",value:rotation}
+                            poseNbt[bone.split("_").map(str => (str[0].toUpperCase() + str.substring(1))).join("")] = {type:"floatArray",value:data}
                         } else {
-                            rotNbt = rotation[1]
+                            rotNbt = data.rotation[1]
                         }
                     }
                     if(time-currentTime > 1 && output.value.length >= 1) output.value[output.value.length-1].delay = {type:"int",value:time-currentTime}
