@@ -53,9 +53,7 @@ function roundTime(time){return Math.floor(time*20)}
                     }
                     if(boneName == "armor_stand" && bone.position.length >= 1){
                         bone.position.forEach(keyframe => {
-                            time = roundTime(keyframe.time)
-                            keyframes[time] ??= {}
-                            keyframes[time][boneName] ??= {}
+                            time=roundTime(keyframe.time),keyframes[time]??={},keyframes[time][boneName]??={};
                             keyframes[time][boneName].position = getArray(keyframe.data_points[0]).map(n => -1*parseFloat(n).toFixed(2))
                             keyframes[time][boneName].position[1] *= -1
                         })
