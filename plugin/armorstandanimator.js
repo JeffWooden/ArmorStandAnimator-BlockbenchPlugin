@@ -84,6 +84,7 @@ function roundTime(time){return Math.floor(time*20)}
                     currentTime = time
                 }
                 nbt = {jw_aa:{type:"compound", value:{keyframes:{type:"list",value:output}}}}
+                switch(selectedAnimation.loop){case"once":nbt.jw_aa.value.resetToDefault={type:"int",value:1};break;case"loop":nbt.jw_aa.value.looping={type:"int",value:1}}
                 console.log(stringify("list", output))
             }});
 
