@@ -48,7 +48,7 @@ function roundTime(time){return Math.floor(time*20)}
                             time = roundTime(keyframe.time)
                             rotation = getArray(keyframe.data_points[0]).map(n => parseFloat(n).toFixed(2))
                             keyframes[time] ??= {}
-                            if(boneName!="armor_stand"){keyframes[time][boneName] = rotation}else{keyframes[time][boneName] = {rotation: rotation}} 
+                            if(boneName!="armor_stand"){keyframes[time][boneName] = rotation}else{keyframes[time][boneName] ??= {}; keyframes[time][boneName].rotation = rotation} 
                         })
                     }
                     if(boneName == "armor_stand" && bone.position.length >= 1){
