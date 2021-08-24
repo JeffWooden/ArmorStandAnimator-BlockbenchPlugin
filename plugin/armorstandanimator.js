@@ -86,6 +86,11 @@ function roundTime(time){return Math.floor(time*20)}
                 nbt = {animation:{type:"compound", value:{}}}
                 switch(selectedAnimation.loop){case"once":nbt.animation.value.resetToDefault={type:"int",value:1};break;case"loop":nbt.animation.value.looping={type:"int",value:1};if(loopDelay && output.value.length>=1)output.value[output.value.length-1].delay = {type:"int",value:roundTime(loopDelay)};break;default:break;}
                 nbt.animation.value.keyframes = {type:"list",value:output}
+                Blockbench.export({
+                    type:`${selectedAnimation.name}`,
+                    extensions: [".mcfunction"],
+                    content: `# This function command should be executed as the armor stand.\ndata merge storage jw:aa ${stringify("compound", nbt)}\nexecute as @s run function jw_aa:load_animation`
+                })
             }});
 
             // Create menu bar and integrates button in it
