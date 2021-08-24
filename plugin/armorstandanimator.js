@@ -64,6 +64,8 @@ function roundTime(time){return Math.floor(time*20)}
                 currentTime = 0
                 startDelay = (selectedAnimation.start_delay != "") ? parseFloat(selectedAnimation.start_delay) : 0
                 if(startDelay>0) output.value.push({delay:{type:"int",value:roundTime(startDelay)}})
+                animationMode = selectedAnimation.loop
+                loopDelay = eval(selectedAnimation.loop_delay)
                 for([time,bone] of Object.entries(keyframes)){
                     entry = {}
                     poseNbt = {}
