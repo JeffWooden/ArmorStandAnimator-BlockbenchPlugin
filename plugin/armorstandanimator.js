@@ -51,6 +51,15 @@ function roundTime(time){return Math.floor(time*20)}
                             if(boneName!="armor_stand"){keyframes[time][boneName] = rotation}else{keyframes[time][boneName] = {rotation: rotation}} 
                         })
                     }
+                    if(boneName == "armor_stand" && bone.position.length >= 1){
+                        bone.position.forEach(keyframe => {
+                            time = roundTime(keyframe.time)
+                            keyframes[time] ??= {}
+                            keyframes[time][boneName] ??= {}
+                            keyframes[time][boneName].position = getArray(keyframe.data_points[0]).map(n => -1*parseFloat(n).toFixed(2))
+                            keyframes[time][boneName].position[1] *= -1
+                        })
+                    }
                 })
 
                 let output = {value:[],type:"compound"}
@@ -61,19 +70,23 @@ function roundTime(time){return Math.floor(time*20)}
                     entry = {}
                     poseNbt = {}
                     rotNbt = undefined;
+                    posNbt = undefined;
                     for([bone,data] of Object.entries(bone)){
                         if(bone != "armor_stand") {
                             poseNbt[bone.split("_").map(str => (str[0].toUpperCase() + str.substring(1))).join("")] = {type:"floatArray",value:data}
                         } else {
                             rotNbt = data.rotation[1]
+                            posNbt = data.position
                         }
                     }
                     if(time-currentTime > 1 && output.value.length >= 1) output.value[output.value.length-1].delay = {type:"int",value:time-currentTime}
                     if(Object.entries(poseNbt).length > 0) entry.Pose = {type:"compound",value:poseNbt}
                     if(rotNbt !== undefined) entry.Rot = {type:"float",value:rotNbt}
+                    if(posNbt !== undefined) entry.Pos = {type:"list",value:posNbt}
                     output.value.push(entry)
                     currentTime = time
                 }
+                console.log(stringify("list", output))
             }});
 
             // Create menu bar and integrates button in it
