@@ -80,7 +80,7 @@ function roundTime(time){return Math.floor(time*20)}
                     if(time-currentTime > 1 && output.value.length >= 1) output.value[output.value.length-1].delay = {type:"int",value:time-currentTime}
                     if(Object.entries(poseNbt).length > 0) entry.Pose = {type:"compound",value:poseNbt}
                     if(rotNbt !== undefined) entry.Rot = {type:"float",value:rotNbt[1]}
-                    if(posNbt !== undefined) entry.Pos = {type:"list",value:posNbt}
+                    if(posNbt !== undefined) entry.Pos = {type:"list",value:{type:"double",value:posNbt}}
                     output.value.push(entry)
                     currentTime = time
                 }
