@@ -46,7 +46,7 @@ function roundTime(time){return Math.floor(time*20)}
                     if(bone.rotation.length >= 1){
                         bone.rotation.forEach(keyframe => {
                             time = roundTime(keyframe.time)
-                            if(!keyframes[time]) keyframes[time] = {}
+                            keyframes[time] ??= {}
                             keyframes[time][boneName] = getArray(keyframe.data_points[0]).map(n => parseFloat(n).toFixed(2))
                         })
                     }
