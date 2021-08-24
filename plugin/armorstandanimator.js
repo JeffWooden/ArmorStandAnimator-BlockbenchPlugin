@@ -73,13 +73,13 @@ function roundTime(time){return Math.floor(time*20)}
                         if(bone != "armor_stand") {
                             poseNbt[bone.split("_").map(str => (str[0].toUpperCase() + str.substring(1))).join("")] = {type:"floatArray",value:data}
                         } else {
-                            rotNbt = data.rotation[1]
+                            rotNbt = data.rotation
                             posNbt = data.position
                         }
                     }
                     if(time-currentTime > 1 && output.value.length >= 1) output.value[output.value.length-1].delay = {type:"int",value:time-currentTime}
                     if(Object.entries(poseNbt).length > 0) entry.Pose = {type:"compound",value:poseNbt}
-                    if(rotNbt !== undefined) entry.Rot = {type:"float",value:rotNbt}
+                    if(rotNbt !== undefined) entry.Rot = {type:"float",value:rotNbt[1]}
                     if(posNbt !== undefined) entry.Pos = {type:"list",value:posNbt}
                     output.value.push(entry)
                     currentTime = time
