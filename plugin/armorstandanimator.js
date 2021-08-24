@@ -30,6 +30,7 @@ function roundTime(time){return Math.floor(time*20)}
             }});
             export_button = new Action("export",{name:"Export Animation",description:"",icon:"engineering",click:function()
             {
+                // Check all the prerequisites: animate mode opened, an animation selected, its snapping value to 20 FPS, a convetion approved namespace.
                 if(Mode.selected.id != "animate") return warnUser(`You've to open the "Animate" mode before exporting the animation.`, config.warn)
 
                 selectedAnimation = Animator.selected
@@ -38,9 +39,12 @@ function roundTime(time){return Math.floor(time*20)}
                 if(selectedAnimation.snapping != 20) return warnUser(`Invalid snapping number ! Please, set the animation snapping to "20"`, config.warn)
 
                 if(!/^([a-z0-9-_\.]+)$/.test(selectedAnimation.name)) return warnUser(`Your animation name doesn't respect namespace conventions... Click to see more.`, 8000, "https://minecraft.fandom.com/wiki/Resource_location#Java_Edition")
+                
+                // Collects and formats all the keyframes into an object. Each key corresponds to a specific keyframe in the timeline.
                 let keyframes = {}
                 Object.values(selectedAnimation.animators).forEach(bone => {
                     boneName = bone.name.replace(/_bone/, '')
+                    // Collects the rotation keyframes if the animation contains any.
                     if(bone.rotation.length >= 1){
                         bone.rotation.forEach(keyframe => {
                             time = roundTime(keyframe.time)
@@ -49,7 +53,8 @@ function roundTime(time){return Math.floor(time*20)}
                             if(boneName!="armor_stand"){keyframes[time][boneName] = rotation}else{keyframes[time][boneName] ??= {}; keyframes[time][boneName].rotation = rotation} 
                         })
                     }
-                    if(boneName == "armor_stand" && bone.position.length >= 1){
+                    // Collects the position keyframes if the animation contains any.
+                    if(boneName == "armor_stand" && bone.position.length >= 1){ // Only the armorstand can move freely in space whereas the limbs are stuck.
                         bone.position.forEach(keyframe => {
                             time=roundTime(keyframe.time),keyframes[time]??={},keyframes[time][boneName]??={};
                             keyframes[time][boneName].position = getArray(keyframe.data_points[0]).map(n => -1*parseFloat(n).toFixed(2))
@@ -58,17 +63,18 @@ function roundTime(time){return Math.floor(time*20)}
                     }
                 })
 
+                // Create the output component, which register the keyframes in a readable langage for the datapack.
                 let output = {value:[],type:"compound"}
                 currentTime = 0
                 startDelay = (selectedAnimation.start_delay != "") ? parseFloat(selectedAnimation.start_delay) : 0
                 if(startDelay>0) output.value.push({delay:{type:"int",value:roundTime(startDelay)}})
                 loopDelay = eval(selectedAnimation.loop_delay)
-                for([time,bone] of Object.entries(keyframes)){
+                for([time,bone] of Object.entries(keyframes)){ // It iterates through the keyframes and bones.
                     entry = {}
                     poseNbt = {}
                     rotNbt = undefined;
                     posNbt = undefined;
-                    for([bone,data] of Object.entries(bone)){
+                    for([bone,data] of Object.entries(bone)){ // It iterates through all the contained data.
                         if(bone != "armor_stand") {
                             poseNbt[bone.split("_").map(str => (str[0].toUpperCase() + str.substring(1))).join("")] = {type:"floatArray",value:data}
                         } else {
@@ -76,6 +82,7 @@ function roundTime(time){return Math.floor(time*20)}
                             posNbt = data.position
                         }
                     }
+                    // Finalized the translation by adding all the part in the output component.
                     if(time-currentTime > 1 && output.value.length >= 1) output.value[output.value.length-1].delay = {type:"int",value:time-currentTime}
                     if(Object.entries(poseNbt).length > 0) entry.Pose = {type:"compound",value:poseNbt}
                     if(rotNbt !== undefined) entry.Rot = {type:"float",value:rotNbt[1]}
@@ -83,9 +90,11 @@ function roundTime(time){return Math.floor(time*20)}
                     output.value.push(entry)
                     currentTime = time
                 }
+                // Lastly, all the remaining settings go in the nbt component, which gathers them with the final output.
                 nbt = {animation:{type:"compound", value:{}}}
                 switch(selectedAnimation.loop){case"once":nbt.animation.value.resetToDefault={type:"int",value:1};break;case"loop":nbt.animation.value.looping={type:"int",value:1};if(loopDelay && output.value.length>=1)output.value[output.value.length-1].delay = {type:"int",value:roundTime(loopDelay)};break;default:break;}
                 nbt.animation.value.keyframes = {type:"list",value:output}
+                // Export module, it creates a .mcfunction file that load the animation into an armor_stand.
                 Blockbench.export({
                     type:`${selectedAnimation.name}`,
                     extensions: [".mcfunction"],
