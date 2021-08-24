@@ -84,7 +84,7 @@ function roundTime(time){return Math.floor(time*20)}
                     currentTime = time
                 }
                 nbt = {jw_aa:{type:"compound", value:{}}}
-                switch(selectedAnimation.loop){case"once":nbt.jw_aa.value.resetToDefault={type:"int",value:1};break;case"loop":nbt.jw_aa.value.looping={type:"int",value:1}}
+                switch(selectedAnimation.loop){case"once":nbt.jw_aa.value.resetToDefault={type:"int",value:1};break;case"loop":nbt.jw_aa.value.looping={type:"int",value:1};if(loopDelay && output.value.length>=1)output.value[output.value.length-1].delay = {type:"int",value:roundTime(loopDelay)};break;default:break;}
                 nbt.jw_aa.value.keyframes = {type:"list",value:output}
             }});
 
