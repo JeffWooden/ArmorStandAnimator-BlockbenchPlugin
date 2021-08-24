@@ -2,7 +2,7 @@ function warnUser(msg,time){
     return Blockbench.showQuickMessage(msg,time)
 }
 
-function getArray(data_point){return[data_point.x,data_point.y,data_point.z]}
+function getArray(data_point){return[data_point.x*-1,data_point.y,data_point.z*-1]}
 function roundTime(time){return Math.floor(time*20)}
 
 (function(){
