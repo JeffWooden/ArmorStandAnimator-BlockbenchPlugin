@@ -37,6 +37,7 @@ function roundTime(time){return Math.floor(time*20)}
 
                 if(selectedAnimation.snapping != 20) return warnUser(`Invalid snapping number ! Please, set the animation snapping to "20"`, config.warn)
 
+                if(!/^([a-z0-9-_\.]+)$/.test(selectedAnimation.name)) return warnUser(`Your animation name doesn't respect namespace conventions... Click to see more.`, 8000, "https://minecraft.fandom.com/wiki/Resource_location#Java_Edition")
                 let keyframes = {}
                 Object.values(selectedAnimation.animators).forEach(bone => {
                     boneName = bone.name.replace(/_bone/, '')
