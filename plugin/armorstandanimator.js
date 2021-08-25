@@ -9,8 +9,8 @@ function roundTime(time){return Math.floor(time*20)}
     var config = {
         warn : 4000
     }
-
-    var menu;
+    
+    var pluginMenu;
     var load_as_button;
     var export_button;
     
