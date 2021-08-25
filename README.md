@@ -1,7 +1,7 @@
 # ArmorStandAnimator-BlockbenchPlugin
 Blockbench plugin used to help Minecraft creators animating armor stands in the game.
 ## How to install
-- Download the .js file and open **Blockbench**.
+- Download the `armorstandanimator-<version>.js file and open **Blockbench**.
 - Once the software is ready, go onto `File > Plugins` and click on `Load Plugin from File` .
 
 ![...](https://media.discordapp.net/attachments/535165596321447946/880079080974843955/unknown.png)
