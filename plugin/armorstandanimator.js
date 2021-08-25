@@ -106,9 +106,9 @@ function roundTime(time){return Math.floor(time*20)}
                 })
             }});
 
-            // Create menu bar and integrates button in it
-            menu = new BarMenu("asa", [load_as_button,export_button])
-            menu.label.innerText = "Armorstand Animator"
+            // Create pluginMenu bar and integrates button in it
+            pluginMenu = new BarMenu("asa", [load_as_button,export_button])
+            pluginMenu.label.innerText = "Armorstand Animator"
         },
         onunload(){
             // menu.delete()
