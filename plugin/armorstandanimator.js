@@ -7,7 +7,8 @@ function roundTime(time){return Math.floor(time*20)}
     function stringify(t,e){switch(t){case"compound":return 0===Object.keys(e).length?"{}":`{${Object.entries(e).map(([t,e])=>`${t}:${stringify(e.type,e.value)}`).join(",")}}`;case"list":return 0===e.value.length?"[]":(isCompact(e.type),`[${stringifyEntries(e.type,e.value,",")}]`);case"byteArray":return`[B;${stringifyEntries("byte",e,",")}]`;case"intArray":return`[I;${stringifyEntries("int",e,",")}]`;case"longArray":return`[L;${stringifyEntries("long",e,",")}]`;case"floatArray":return`[${stringifyEntries("float",e,",")}]`;case"string":return'"'+e.replace(/(\\|")/g,"\\$1")+'"';case"byte":return e+"b";case"double":return e+"d";case"float":return e+"f";case"short":return e+"s";case"int":return""+e;case"long":return stringifyLong(e)+"L";default:return"null"}}function stringifyLong(t){return dataView.setInt32(0,Number(t[0])),dataView.setInt32(4,Number(t[1])),""+dataView.getBigInt64(0)}function stringifyEntries(t,e,r){return e.map(e=>`${stringify(t,e)}`).join(r)}function isCompact(t){return"byte"===t||"double"===t||"float"===t||"short"===t||"int"===t||"long"===t}
     
     var config = {
-        warn : 4000
+        warn : 4000,
+        display: 8000
     }
     
     var pluginMenu;
