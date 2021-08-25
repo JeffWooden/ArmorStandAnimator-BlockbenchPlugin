@@ -2,10 +2,16 @@
 Blockbench plugin used to help Minecraft creators animating armor stands in the game.
 ## How to install
 - Download the .js file and open **Blockbench**.
-- Once the software is ready, go onto `File > Plugins` and click on `Load Plugin from File`.
+- Once the software is ready, go onto `File > Plugins` and click on `Load Plugin from File` .
+
+![...](https://media.discordapp.net/attachments/535165596321447946/880079080974843955/unknown.png)
 - Select the .js file, wait for the installation to finish.
 - Then go onto `Help > Developer > Reload Blockbench`.
+
+![...](https://media.discordapp.net/attachments/535165596321447946/880079353499750480/unknown.png)
 - Confirm by clicking "Ok" and *voilà*, the plugin is ready to use.
+
+![...](https://media.discordapp.net/attachments/535165596321447946/880079523620728833/unknown.png)
 ## How to use
  - First, you'll need to create a new project that contains an "animate" mode (e.g. Generic Model, Bedrock Model).
  - Import the armorstand 3d model by clicking on `Armorstand Animator > Load Armorstand Model`.
