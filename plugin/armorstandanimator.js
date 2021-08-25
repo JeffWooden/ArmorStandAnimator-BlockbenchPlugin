@@ -119,6 +119,22 @@ function roundTime(time){return Math.floor(time*20)}
 
             delete MenuBar.menus.asa
             MenuBar.update()
+        },
+        oninstall(){
+            warnUser("Plugin has been successfully installed !", config.display, undefined, "#39c08f")
+        },
+        onuninstall(){
+            Blockbench.showMessageBox({
+                buttons: ['No thanks','Let\' do it!'],
+                confirm: 1,
+                cancel: 0,
+                title: "You've uninstalled the plugin.",
+                message: "Do you have any suggestion to share ?",
+                icon: "question_answer"
+            },(result) => {
+                if(result==1) Blockbench.openLink("https://github.com/JeffWooden/ArmorStandAnimator-BlockbenchPlugin/issues/new");
+                warnUser("Thanks you for using the plugin. Have a good day !")
+            })            
         }
     })
 })();
