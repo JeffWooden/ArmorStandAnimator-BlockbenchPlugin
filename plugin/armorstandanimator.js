@@ -22,6 +22,8 @@ function roundTime(time){return Math.floor(time*20)}
         icon: "animation",
         variant: "both",
         onload(){
+            // Onload message
+            console.log("%cArmorStand Animator", "padding: 4px 8px;background: linear-gradient(to right bottom, #1e93d9, #00b1e2, #00ccd2, #20e2af, #9ef188, #f9f871);font-size: 1.2em;color: black;border: 2px solid #edfbff;border-radius: 5px;")
             // Warn the user if its project doesn't contain an animation mode.
             ["new_project","open_project"].forEach((evt) => {Blockbench.on(evt, () => {
                 warnUser(`Please, make sure your current project have an "animate" mode. If not, the "ArmorStandAnimator" plugin will not work.`, config.warn, undefined, "#00b7ff")
