@@ -1,4 +1,4 @@
-function warnUser(msg,time,link=""){return Blockbench.showToastNotification({text:msg,expire:time,click(){if(link)return Blockbench.openLink(link)}})}
+function warnUser(msg,time,link="",color="#f05664"){return Blockbench.showToastNotification({text:msg,expire:time,color:color,click(){if(link)return Blockbench.openLink(link)}})}
 function getArray(data_point){return[data_point.x*-1,data_point.y,data_point.z*-1]}
 function roundTime(time){return Math.floor(time*20)}
 
