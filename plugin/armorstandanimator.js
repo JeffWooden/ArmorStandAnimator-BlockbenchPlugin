@@ -113,7 +113,11 @@ function roundTime(time){return Math.floor(time*20)}
             pluginMenu.label.innerText = "Armorstand Animator"
         },
         onunload(){
-            // menu.delete()
+            load_as_button.delete()
+            export_button.delete()
+
+            delete MenuBar.menus.asa
+            MenuBar.update()
         }
     })
 })();
