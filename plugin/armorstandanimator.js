@@ -22,6 +22,10 @@ function roundTime(time){return Math.floor(time*20)}
         icon: "animation",
         variant: "both",
         onload(){
+            // Warn the user if its project doesn't contain an animation mode.
+            ["new_project","open_project"].forEach((evt) => {Blockbench.on(evt, () => {
+                warnUser(`Please, make sure your current project have an "animate" mode. If not, the "ArmorStandAnimator" plugin will not work.`, config.warn, undefined, "#00b7ff")
+            })})
             // Create buttons
             load_as_button = new Action("load_as",{name:"Load Armorstand Model",description:"",icon:"add_circle_outline",click:function()
             {
